@@ -1,0 +1,47 @@
+﻿@model EMSProject.Models.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="stat-grid">
+    <div class="stat-card">
+        <p class="label">Total Headcount</p>
+        <p class="value">@Model.TotalHeadcount</p>
+    </div>
+    <div class="stat-card">
+        <p class="label">Total Payroll</p>
+        <p class="value">₹@Model.TotalPayroll.ToString("N0")</p>
+    </div>
+    <div class="stat-card">
+        <p class="label">Departments</p>
+        <p class="value">@Model.DepartmentBreakdown.Count</p>
+    </div>
+</div>
+
+<div class="glass-panel">
+    <div class="panel-head">
+        <h3>Department Breakdown</h3>
+    </div>
+
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Department</th>
+                <th>Employees</th>
+                <th>Total Salary</th>
+                <th>Avg. Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var dept in Model.DepartmentBreakdown)
+            {
+                <tr>
+                    <td>@dept.DepartmentName</td>
+                    <td>@dept.EmployeeCount</td>
+                    <td>₹@dept.TotalSalary.ToString("N0")</td>
+                    <td>₹@((dept.EmployeeCount > 0 ? dept.TotalSalary / dept.EmployeeCount : 0).ToString("N0"))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,67 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Access Denied · EMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+            .denied-wrap {
+                min-height: 100vh;
+                display: grid;
+                place-items: center;
+                background: var(--bg);
+                text-align: center;
+            }
+
+            .denied-card {
+                background: var(--glass);
+                border: 1px solid var(--glass-border);
+                border-radius: var(--radius);
+                padding: 40px;
+                backdrop-filter: blur(10px);
+                box-shadow: var(--shadow);
+                max-width: 380px;
+            }
+
+            .denied-icon {
+                width: 56px;
+                height: 56px;
+                border-radius: 50%;
+                background: rgba(248,113,113,0.12);
+                display: grid;
+                place-items: center;
+                margin: 0 auto 16px;
+            }
+
+            .denied-card h2 {
+                margin-bottom: 8px;
+            }
+
+            .denied-card p {
+                color: var(--text-muted);
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+    </style>
+</head>
+<body>
+    <div class="denied-wrap">
+        <div class="denied-card">
+            <div class="denied-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 9v4m0 4h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"
+                          stroke="#F87171" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <h2>Access Denied</h2>
+            <p>Is page ko dekhne ki permission tumhare account ke paas nahi hai.</p>
+            <a asp-controller="Home" asp-action="Index" class="btn-primary" style="display:inline-block; padding:10px 20px;">Home pe jao</a>
+        </div>
+    </div>
+</body>
+</html>

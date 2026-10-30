@@ -1,0 +1,59 @@
+﻿@model IEnumerable<EMSProject.Models.Employee>
+@{
+    ViewData["Title"] = "Employees";
+}
+
+<div class="stat-grid">
+    <div class="stat-card">
+        <p class="label">Total Employees</p>
+        <p class="value">@Model.Count()</p>
+    </div>
+    <div class="stat-card">
+        <p class="label">Departments</p>
+        <p class="value">@Model.Select(e => e.DepartmentId).Distinct().Count()</p>
+    </div>
+</div>
+
+<div class="glass-panel">
+    <div class="panel-head">
+        <h3>All Employees</h3>
+        @if (User.IsInRole("Admin") || User.IsInRole("HR"))
+        {
+            <a asp-action="Create" class="btn-primary">+ Add Employee</a>
+        }
+    </div>
+
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Designation</th>
+                <th>Department</th>
+                <th>Salary</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in Model)
+            {
+                <tr>
+                    <td>@emp.FullName</td>
+                    <td>@emp.Email</td>
+                    <td>@emp.Designation</td>
+                    <td>@emp.Department?.Name</td>
+                    <td>₹@emp.Salary.ToString("N0")</td>
+                    <td><span class="badge active">Active</span></td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@emp.Id" class="btn-ghost">View</a>
+                        @if (User.IsInRole("Admin") || User.IsInRole("HR"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@emp.Id" class="btn-ghost">Edit</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

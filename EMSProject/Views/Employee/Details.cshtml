@@ -1,0 +1,39 @@
+﻿@model EMSProject.Models.Employee
+@{
+    ViewData["Title"] = "Employee Details";
+}
+
+<div class="glass-panel" style="padding:28px; max-width:560px;">
+    <h3 style="margin-bottom:20px;">@Model.FullName</h3>
+
+    <div style="display:grid; grid-template-columns: 140px 1fr; row-gap:14px; font-size:14px;">
+        <span style="color:var(--text-muted);">Email</span>
+        <span>@Model.Email</span>
+
+        <span style="color:var(--text-muted);">Phone</span>
+        <span>@(Model.PhoneNumber ?? "—")</span>
+
+        <span style="color:var(--text-muted);">Designation</span>
+        <span>@Model.Designation</span>
+
+        <span style="color:var(--text-muted);">Department</span>
+        <span>@(Model.Department?.Name ?? "—")</span>
+
+        <span style="color:var(--text-muted);">Salary</span>
+        <span>₹@Model.Salary.ToString("N0")</span>
+
+        <span style="color:var(--text-muted);">Date of Joining</span>
+        <span>@Model.DateOfJoining.ToString("dd MMM yyyy")</span>
+
+        <span style="color:var(--text-muted);">Status</span>
+        <span><span class="badge @(Model.IsActive ? "active" : "inactive")">@(Model.IsActive ? "Active" : "Inactive")</span></span>
+    </div>
+
+    <div style="margin-top:24px; display:flex; gap:10px;">
+        @if (User.IsInRole("Admin") || User.IsInRole("HR"))
+        {
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-primary">Edit</a>
+        }
+        <a asp-action="Index" class="btn-ghost">Back to list</a>
+    </div>
+</div>

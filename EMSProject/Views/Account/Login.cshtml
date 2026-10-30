@@ -1,0 +1,53 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Login · EMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+            .auth-wrap { min-height: 100vh; display: grid; place-items: center; background: var(--bg); }
+            .auth-card { width: 360px; background: var(--glass); border: 1px solid var(--glass-border);
+                border-radius: var(--radius); padding: 32px; backdrop-filter: blur(10px); box-shadow: var(--shadow); }
+            .auth-card h2 { margin-bottom: 4px; }
+            .auth-card p.sub { color: var(--text-muted); font-size: 13px; margin-bottom: 24px; }
+            .form-field { margin-bottom: 16px; }
+            .form-field label { display: block; font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
+            .form-field input { width: 100%; padding: 10px 12px; background: rgba(255,255,255,0.03);
+                border: 1px solid var(--glass-border); border-radius: 10px; color: var(--text); font-size: 14px; }
+            .auth-card .btn-primary { width: 100%; margin-top: 8px; padding: 11px; }
+            .auth-foot { text-align: center; margin-top: 18px; font-size: 13px; color: var(--text-muted); }
+            .auth-foot a { color: var(--accent-2); }
+    </style>
+</head>
+<body>
+    <div class="auth-wrap">
+        <div class="auth-card">
+            <h2>Welcome back</h2>
+            <p class="sub">Login to your EMS account</p>
+
+            <form asp-controller="Account" asp-action="Login" method="post">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="All" class="text-danger" style="font-size:13px; margin-bottom:12px;"></div>
+
+                <div class="form-field">
+                    <label>Email</label>
+                    <input type="email" name="email" required />
+                </div>
+                <div class="form-field">
+                    <label>Password</label>
+                    <input type="password" name="password" required />
+                </div>
+
+                <button type="submit" class="btn-primary">Login</button>
+            </form>
+
+            <p class="auth-foot">Account nahi hai? <a asp-controller="Account" asp-action="Register">Register karo</a></p>
+        </div>
+    </div>
+</body>
+</html>
